@@ -42,4 +42,5 @@ int main(){
     free(people);
     
     return 0;
+    
 }
