@@ -1,46 +1,45 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
+
 int main(){
-    int alphabet[26];
-    for (int i=0; i<26; i++){
-        alphabet[i] = 0;    
+    int num;
+    scanf("%d", &num);
+    
+    int(*people)[2] = malloc(sizeof(int)*2*num);
+    if (people == NULL) {
+        return 1;
     }
     
-    char word[1000001];
-    scanf("%s", word);
-    int len = strlen(word);
-    
-    for (int i=0; i <len; i++){
-        char alpha = word[i];
-        int index;
-        if (alpha >= 'a' && alpha <= 'z') {
-            index = alpha - 'a';
-        }
-        else if (alpha >= 'A' && alpha <= 'Z') {
-            index = alpha - 'A';            
-        }
-        alphabet[index]++;
-    }
+    for (int i=0; i<num; i++){
+        scanf("%d %d", &people[i][0], &people[i][1]);
         
-    int maxnum = 0;
-    int maxidx;
-    int duplicate = 0;
+    }
     
-    for (int i=0; i<26; i++){
-        if (maxnum < alphabet[i]){
-            maxnum = alphabet[i];
-            maxidx = i;
-            duplicate = 0;
+    int ranklist[num];
+    for (int i=0; i<num; i++){
+        ranklist[i] = 0;
+    }
+    
+    for (int i=0; i<num; i++){
+        int rank = 1;
+        
+        for (int j=0; j<num; j++){
+            if (i==j){
+                continue;
+            }
+            if (people[j][0] > people[i][0] && people[j][1] > people[i][1]){
+                rank++;
+            }
         }
-        else if (maxnum == alphabet[i]){
-            duplicate = 1;
-        }
+        
+        ranklist[i] += rank;
     }
-    if (duplicate == 1){
-        printf("%c",'?');
+    
+    for (int i=0; i<num; i++){
+        printf("%d ", ranklist[i]);
     }
-    else{
-        printf("%c", maxidx + 'A');
-    }
+    
+    free(people);
+    
     return 0;
 }
