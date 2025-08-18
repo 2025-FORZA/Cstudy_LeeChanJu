@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main(){
+    int n, max = 0, index = -1;
+    for (int i=1; i<=9; i++){
+        scanf("%d", &n);
+        if (max<n) {
+            max = n;
+            index = i;
+        }
+    }
+    
+    printf("%d\n", max);
+    printf("%d", index);
+    
+    return 0;
+}
