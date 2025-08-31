@@ -7,6 +7,7 @@ int main(){
     for (; n>0; n--){
         result = result*n;
     }
+
     
     printf("%d", result);
     
